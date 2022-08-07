@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-const customRender = (ui, options = {}) =>
+const customRender = (ui: JSX.Element, options = {}) =>
   render(ui, {
     wrapper: ({ children }) => children,
     ...options,
