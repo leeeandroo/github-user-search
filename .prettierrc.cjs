@@ -3,9 +3,8 @@ module.exports = {
   bracketSpacing: true,
   htmlWhitespaceSensitivity: 'css',
   insertPragma: false,
-  bracketSameLine: true,
+  bracketSameLine: false,
   jsxSingleQuote: false,
-  printWidth: 120,
   proseWrap: 'always',
   quoteProps: 'as-needed',
   requirePragma: false,
@@ -14,4 +13,5 @@ module.exports = {
   tabWidth: 2,
   trailingComma: 'all',
   useTabs: false,
+  printWidth: 100,
 };
