@@ -1,60 +1,34 @@
 import User from './User';
 
-function SearchResult() {
-  const result = {
-    total_count: 2,
-    incomplete_results: false,
-    items: [
-      {
-        login: 'leeeandroo',
-        id: 2144796,
-        node_id: 'MDQ6VXNlcjIxNDQ3OTY=',
-        avatar_url: 'https://avatars.githubusercontent.com/u/2144796?v=4',
-        gravatar_id: '',
-        url: 'https://api.github.com/users/leeeandroo',
-        html_url: 'https://github.com/leeeandroo',
-        followers_url: 'https://api.github.com/users/leeeandroo/followers',
-        following_url: 'https://api.github.com/users/leeeandroo/following{/other_user}',
-        gists_url: 'https://api.github.com/users/leeeandroo/gists{/gist_id}',
-        starred_url: 'https://api.github.com/users/leeeandroo/starred{/owner}{/repo}',
-        subscriptions_url: 'https://api.github.com/users/leeeandroo/subscriptions',
-        organizations_url: 'https://api.github.com/users/leeeandroo/orgs',
-        repos_url: 'https://api.github.com/users/leeeandroo/repos',
-        events_url: 'https://api.github.com/users/leeeandroo/events{/privacy}',
-        received_events_url: 'https://api.github.com/users/leeeandroo/received_events',
-        type: 'User',
-        site_admin: false,
-        score: 1.0,
-      },
-      {
-        login: 'leeeandrooo',
-        id: 42454469,
-        node_id: 'MDQ6VXNlcjQyNDU0NDY5',
-        avatar_url: 'https://avatars.githubusercontent.com/u/42454469?v=4',
-        gravatar_id: '',
-        url: 'https://api.github.com/users/leeeandrooo',
-        html_url: 'https://github.com/leeeandrooo',
-        followers_url: 'https://api.github.com/users/leeeandrooo/followers',
-        following_url: 'https://api.github.com/users/leeeandrooo/following{/other_user}',
-        gists_url: 'https://api.github.com/users/leeeandrooo/gists{/gist_id}',
-        starred_url: 'https://api.github.com/users/leeeandrooo/starred{/owner}{/repo}',
-        subscriptions_url: 'https://api.github.com/users/leeeandrooo/subscriptions',
-        organizations_url: 'https://api.github.com/users/leeeandrooo/orgs',
-        repos_url: 'https://api.github.com/users/leeeandrooo/repos',
-        events_url: 'https://api.github.com/users/leeeandrooo/events{/privacy}',
-        received_events_url: 'https://api.github.com/users/leeeandrooo/received_events',
-        type: 'User',
-        site_admin: false,
-        score: 1.0,
-      },
-    ],
-  };
+import { useSearchUsers } from '../graphql/useSearchUsers';
+import { QueryResultUser } from '../graphql/types';
+
+type SearchResultProps = {
+  query: string;
+};
+
+function SearchResult(props: SearchResultProps) {
+  const { query } = props;
+  const { data: result, isLoading } = useSearchUsers(query);
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (!result) {
+    return <p>No user found.</p>;
+  }
+
+  const { nodes } = result;
 
   return (
     <>
-      <div className="lg:flex mb-4 m-10 rounded gap-x-4">
-        {result.items.map((user) => {
-          return <User key={user.id} userUrl={user.url} />;
+      <div className="grid gap-4 grid-cols-5 mb-4 m-10 rounded gap-x-3">
+        {nodes.map((user: QueryResultUser) => {
+          if (!user.login) {
+            return null;
+          }
+          return <User key={user.id} user={user} />;
         })}
       </div>
 
@@ -62,7 +36,7 @@ function SearchResult() {
         <span className="text-sm text-gray-700 dark:text-gray-400">
           Showing <span className="font-semibold text-gray-900">10</span> to{' '}
           <span className="font-semibold text-gray-900 ">10</span> of{' '}
-          <span className="font-semibold text-gray-900">{result.total_count}</span> Users
+          <span className="font-semibold text-gray-900">{result?.totalCount}</span> Users
         </span>
         <div className="inline-flex mt-2 xs:mt-0">
           <button className="inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
