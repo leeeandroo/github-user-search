@@ -1,6 +1,8 @@
 export interface QueryPageInfo {
   endCursor: string;
   startCursor: string;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
 }
 
 export interface QueryResult {

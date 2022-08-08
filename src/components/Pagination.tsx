@@ -11,8 +11,6 @@ interface PaginationProps {
 export default function Pagination(props: PaginationProps) {
   const { onClickNextPage, onClickPrevPage, page, pageSize, result } = props;
 
-  const totalPages = result.userCount / pageSize;
-
   const startCount = (page - 1) * pageSize + 1;
   const endCount = result.userCount > pageSize ? page * pageSize : result.userCount;
 
@@ -27,7 +25,8 @@ export default function Pagination(props: PaginationProps) {
         <button
           className="inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900"
           onClick={onClickPrevPage}
-          disabled={page === 1}
+          disabled={!result.pageInfo.hasPreviousPage}
+          data-test-id="button-prev"
         >
           <svg
             aria-hidden="true"
@@ -48,7 +47,8 @@ export default function Pagination(props: PaginationProps) {
         <button
           className="inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-r border-0 border-l border-gray-700 hover:bg-gray-900"
           onClick={onClickNextPage}
-          disabled={page >= totalPages}
+          disabled={!result.pageInfo.hasNextPage}
+          data-test-id="button-next"
         >
           Next
           <svg
