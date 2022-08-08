@@ -27,7 +27,7 @@ function SearchResult(props: SearchResultProps) {
     return null;
   }
 
-  if (!result) {
+  if (!result || result.userCount === 0) {
     return <p>No user found.</p>;
   }
 
@@ -43,7 +43,7 @@ function SearchResult(props: SearchResultProps) {
 
   return (
     <>
-      <div className="grid gap-4 grid-cols-5 mb-4 m-10 rounded gap-x-3">
+      <div className="grid gap-4 grid-cols-5 mb-4 m-10 rounded gap-x-3 search-result">
         {nodes.map((user: QueryResultUser) => {
           if (!user.login) {
             return null;

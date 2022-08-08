@@ -23,7 +23,7 @@ function getUserCompany(company: string) {
 function User(props: UserProps) {
   const { user } = props;
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-md p-4">
+    <div className="bg-white rounded-lg border border-gray-200 shadow-md p-4 search-result-card">
       <div className="flex flex-col items-center pb-10">
         <img
           className="mb-3 w-24 h-24 rounded-full shadow-lg"
