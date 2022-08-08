@@ -2,6 +2,8 @@
 
 [![Build and Deploy to Netlify](https://github.com/leeeandroo/github-user-search/actions/workflows/production.yml/badge.svg?branch=main)](https://github.com/leeeandroo/github-user-search/actions/workflows/production.yml)
 
+:rocket: You can check the [application live here](https://scintillating-torrone-adc2f1.netlify.app/)
+
 ## Tech Stack
 
 - Typescript
