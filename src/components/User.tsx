@@ -1,4 +1,4 @@
-import { QueryResultUser } from '../graphql/types';
+import { QueryResultUser } from '../graphql/interfaces';
 
 interface UserProps {
   user: QueryResultUser;
