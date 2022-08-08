@@ -1,18 +1,19 @@
-export type QueryPageInfo = {
+export interface QueryPageInfo {
   endCursor: string;
   startCursor: string;
-};
+}
 
-export type QueryResult = {
+export interface QueryResult {
   pageInfo: QueryPageInfo;
   nodes: Array<QueryResultUser>;
-  totalCount: number;
-};
-type Counter = {
-  totalCount: number;
-};
+  userCount: number;
+}
 
-export type QueryResultUser = {
+interface Counter {
+  totalCount: number;
+}
+
+export interface QueryResultUser {
   avatarUrl: string;
   name: string;
   login: string;
@@ -25,4 +26,4 @@ export type QueryResultUser = {
   starredRepositories: Counter;
   gists: Counter;
   repositories: Counter;
-};
+}

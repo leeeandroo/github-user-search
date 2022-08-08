@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { GraphQLClient, gql } from 'graphql-request';
 
-import { QueryResult } from './types';
+import { QueryResult } from './interfaces';
 
 const API_URL = `https://api.github.com/graphql`;
 
@@ -11,12 +11,12 @@ const graphQLClient = new GraphQLClient(API_URL, {
   },
 });
 
-export function useSearchUsers(query: string) {
-  return useQuery(['posts', query], async (): Promise<QueryResult> => {
+export function useSearchUsers(query: string, pageSize: number, after?: string | null) {
+  return useQuery(['posts', query, pageSize, after], async (): Promise<QueryResult> => {
     const { search } = await graphQLClient.request(
       gql`
-        query search($query: String!) {
-          search(query: $query, type: USER, first: 10) {
+        query search($query: String!, $pageSize: Int!, $after: String) {
+          search(query: $query, type: USER, first: $pageSize, after: $after) {
             pageInfo {
               endCursor
               startCursor
@@ -50,7 +50,7 @@ export function useSearchUsers(query: string) {
           }
         }
       `,
-      { query },
+      { query, pageSize, after },
     );
 
     return search;

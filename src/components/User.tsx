@@ -1,8 +1,8 @@
 import { QueryResultUser } from '../graphql/types';
 
-type UserProps = {
+interface UserProps {
   user: QueryResultUser;
-};
+}
 
 function getUserCompany(company: string) {
   if (!company) {
