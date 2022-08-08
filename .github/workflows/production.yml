@@ -2,18 +2,21 @@
 name: Build and Deploy to Netlify
 on:
   push:
-    branches: 
+    branches:
       - main
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
+
+      - name: Install
+        run: npm ci
 
       - name: Build
         run: npm run build
