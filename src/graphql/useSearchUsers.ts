@@ -11,15 +11,32 @@ const graphQLClient = new GraphQLClient(API_URL, {
   },
 });
 
-export function useSearchUsers(query: string, pageSize: number, after?: string | null) {
-  return useQuery(['posts', query, pageSize, after], async (): Promise<QueryResult> => {
+export function useSearchUsers(
+  query: string,
+  pageSize: number,
+  after?: string | null,
+  before?: string | null,
+) {
+  const first = after || (!after && !before) ? pageSize : null;
+  const last = before ? pageSize : null;
+
+  return useQuery(['posts', query, first, after, last, before], async (): Promise<QueryResult> => {
     const { search } = await graphQLClient.request(
       gql`
-        query search($query: String!, $pageSize: Int!, $after: String) {
-          search(query: $query, type: USER, first: $pageSize, after: $after) {
+        query search($query: String!, $first: Int, $after: String, $last: Int, $before: String) {
+          search(
+            query: $query
+            type: USER
+            first: $first
+            after: $after
+            last: $last
+            before: $before
+          ) {
             pageInfo {
               endCursor
               startCursor
+              hasNextPage
+              hasPreviousPage
             }
             nodes {
               ... on User {
@@ -50,7 +67,7 @@ export function useSearchUsers(query: string, pageSize: number, after?: string |
           }
         }
       `,
-      { query, pageSize, after },
+      { query, first, after, last, before },
     );
 
     return search;

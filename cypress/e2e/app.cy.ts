@@ -55,7 +55,7 @@ describe('User Search', () => {
     cy.contains('158 starred repositorie(s)');
   });
 
-  it('search for user and see the result', () => {
+  it('search for user and nothing found', () => {
     const MOCK_RESPONSES: any = {
       search: {
         data: {
@@ -80,6 +80,24 @@ describe('User Search', () => {
     cy.wait('@searchUsers');
 
     cy.contains('No user found.');
+  });
+
+  it('search for user and paginate', () => {
+    cy.intercept('POST', 'https://api.github.com/graphql').as('searchUsers');
+    cy.visit('/');
+    cy.get('input').type('john');
+    cy.get('form').submit();
+
+    cy.wait('@searchUsers');
+    cy.contains('John McGrath');
+
+    cy.get('[data-test-id="button-next"]').click();
+    cy.wait('@searchUsers');
+    cy.contains('John Fish');
+
+    cy.get('[data-test-id="button-prev"]').click();
+    cy.wait('@searchUsers');
+    cy.contains('John Papa');
   });
 });
 

@@ -11,17 +11,32 @@ interface SearchResultProps {
 
 const PAGE_SIZE = 10;
 
+enum PaginationAction {
+  Next = 1,
+  Prev,
+}
+
 function SearchResult(props: SearchResultProps) {
   const { query } = props;
   const [page, setPage] = useState(1);
   const [after, setAfter] = useState<null | string>(null);
-  const { data: result, isLoading } = useSearchUsers(query, PAGE_SIZE, after);
+  const [before, setBefore] = useState<null | string>(null);
+  const [pagination, setPagination] = useState(PaginationAction.Next);
+  const { data: result, isLoading } = useSearchUsers(query, PAGE_SIZE, after, before);
 
   useEffect(() => {
     if (result) {
-      setAfter(result.pageInfo.endCursor);
+      setAfter(null);
+      setBefore(null);
+
+      if (pagination === PaginationAction.Next) {
+        setAfter(result.pageInfo.endCursor);
+      }
+      if (pagination === PaginationAction.Prev) {
+        setBefore(result.pageInfo.startCursor);
+      }
     }
-  }, [page]);
+  }, [pagination, page]);
 
   if (isLoading) {
     return null;
@@ -34,10 +49,12 @@ function SearchResult(props: SearchResultProps) {
   const { nodes } = result;
 
   function onClickNextPage() {
+    setPagination(PaginationAction.Next);
     setPage(page + 1);
   }
 
   function onClickPrevPage() {
+    setPagination(PaginationAction.Prev);
     setPage(page - 1);
   }
 
