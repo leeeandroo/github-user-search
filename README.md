@@ -1,5 +1,7 @@
 # GitHub User Search
 
+[![Build and Deploy to Netlify](https://github.com/leeeandroo/github-user-search/actions/workflows/production.yml/badge.svg?branch=main)](https://github.com/leeeandroo/github-user-search/actions/workflows/production.yml)
+
 ## Tech Stack
 
 - Typescript
