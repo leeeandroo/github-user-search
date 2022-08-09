@@ -21,9 +21,3 @@
 - `npm run test:e2e` runs E2E tests locally
 - `npm run test:unit` runs unit tests
 - `npm run test:unit:coverage` runs tests and checks coverage
-
-## Improvements
-
-- User Experience
-
-  - Add a loading while requesting the users
