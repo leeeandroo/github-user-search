@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+
+import LoadingSpinner from './LoadingSpinner';
 import Pagination from './Pagination';
 import User from './User';
 
@@ -39,7 +41,7 @@ function SearchResult(props: SearchResultProps) {
   }, [pagination, page]);
 
   if (isLoading) {
-    return null;
+    return <LoadingSpinner />;
   }
 
   if (!result || result.userCount === 0) {
