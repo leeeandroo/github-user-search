@@ -2,7 +2,8 @@
 
 [![Build and Deploy to Netlify](https://github.com/leeeandroo/github-user-search/actions/workflows/production.yml/badge.svg?branch=main)](https://github.com/leeeandroo/github-user-search/actions/workflows/production.yml)
 
-:rocket: You can check the [application live here](https://scintillating-torrone-adc2f1.netlify.app/)
+:rocket: You can check the
+[application live here](https://scintillating-torrone-adc2f1.netlify.app/)
 
 ## Tech Stack
 
@@ -26,9 +27,3 @@
 - User Experience
 
   - Add a loading while requesting the users
-
-- Known issues
-
-  - Some searches are returning items that are "organizations" and seems that the GraphQL API lacks
-    permissions, so it's ending to have an empty object in the array. This issue requires more
-    investigation.
