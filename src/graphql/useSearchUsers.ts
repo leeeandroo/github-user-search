@@ -39,6 +39,14 @@ export function useSearchUsers(
               hasPreviousPage
             }
             nodes {
+              __typename
+              ... on Organization {
+                avatarUrl
+                name
+                login
+                id
+                url
+              }
               ... on User {
                 avatarUrl
                 company
