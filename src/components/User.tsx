@@ -59,21 +59,20 @@ function User(props: UserProps) {
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-md p-4 search-result-card">
       <div className="flex flex-col items-center pb-10 relative">
-        <div className="flex flex-col h-100 w-full items-center">
-          <img
-            className="mb-3 w-24 h-24 rounded-full shadow-lg"
-            src={user.avatarUrl}
-            alt={`${user.name} ${user.login}`}
-          />
-          <span className="absolute top-0 right-0">
-            {user.__typename === 'User' ? <UserIcon /> : <OrganizationIcon />}
-          </span>
-          <h5 className="mb-1 text-xl font-medium text-gray-900">{user.name}</h5>
-          <span className="text-sm text-gray-500">
-            {user.login} <small>{getUserCompany(user.company)}</small>
-          </span>
-          <p>{user.bio}</p>
-        </div>
+        <img
+          className="mb-3 w-24 h-24 rounded-full shadow-lg"
+          src={user.avatarUrl}
+          alt={`${user.name} ${user.login}`}
+        />
+        <span className="absolute top-0 right-0">
+          {user.__typename === 'User' ? <UserIcon /> : <OrganizationIcon />}
+        </span>
+        <h5 className="mb-1 text-xl font-medium text-gray-900">{user.name}</h5>
+        <span className="text-sm text-gray-500">
+          {user.login} <small>{getUserCompany(user.company)}</small>
+        </span>
+        <p>{user.bio}</p>
+
         {user.__typename === 'User' && (
           <>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mt-4 md:mt-6 text-sm">
@@ -96,7 +95,7 @@ function User(props: UserProps) {
             </div>
           </>
         )}
-        <div className="flex mt-4 space-x-3 md:mt-6">
+        <div className="mt-4 space-x-3 md:mt-6">
           <a
             href={user.url}
             target="_blank"
