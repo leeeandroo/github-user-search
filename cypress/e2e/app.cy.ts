@@ -12,6 +12,7 @@ describe('User Search', () => {
             pageInfo: { endCursor: 'Y3Vyc29yOjI=', startCursor: 'Y3Vyc29yOjE=' },
             nodes: [
               {
+                __typename: 'User',
                 avatarUrl:
                   'https://avatars.githubusercontent.com/u/2144796?u=974e17a6424e58e4a40fc1040aca16e5761d2afd&v=4',
                 company: '@audibene-gmbh',
@@ -50,9 +51,9 @@ describe('User Search', () => {
     cy.contains('@audibene-gmbh');
     cy.contains('15 follower(s)');
     cy.contains('32 following');
-    cy.contains('34 repositorie(s)');
+    cy.contains('34 repositories');
     cy.contains('6 gist(s)');
-    cy.contains('158 starred repositorie(s)');
+    cy.contains('158 starred repositories');
   });
 
   it('search for user and nothing found', () => {

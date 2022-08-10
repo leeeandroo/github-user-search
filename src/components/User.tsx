@@ -72,32 +72,30 @@ function User(props: UserProps) {
           {user.login} <small>{getUserCompany(user.company)}</small>
         </span>
         <p>{user.bio}</p>
+
         {user.__typename === 'User' && (
           <>
-            <div className="flex mt-4 space-x-3 md:mt-6">
-              <span>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 mt-4 md:mt-6 text-sm">
+              <div>
                 <strong>{user.followers?.totalCount}</strong> follower(s)
-              </span>
-              <span>
+              </div>
+              <div>
                 <strong>{user.following?.totalCount}</strong> following
-              </span>
-            </div>
-            <div className="flex space-x-3">
-              <span>
-                <strong>{user.repositories?.totalCount}</strong> repositorie(s)
-              </span>
-              <span>
+              </div>
+
+              <div>
+                <strong>{user.repositories?.totalCount}</strong> repositories
+              </div>
+              <div>
                 <strong>{user.gists?.totalCount}</strong> gist(s)
-              </span>
-            </div>
-            <div className="flex mb-4 space-x-3 md:mb-6">
-              <span>
-                <strong>{user.starredRepositories?.totalCount}</strong> starred repositorie(s)
-              </span>
+              </div>
+              <div className="lg:col-span-2">
+                <strong>{user.starredRepositories?.totalCount}</strong> starred repositories
+              </div>
             </div>
           </>
         )}
-        <div className="flex mt-4 space-x-3 md:mt-6">
+        <div className="mt-4 space-x-3 md:mt-6">
           <a
             href={user.url}
             target="_blank"
