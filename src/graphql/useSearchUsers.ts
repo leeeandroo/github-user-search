@@ -20,7 +20,7 @@ export function useSearchUsers(
   const first = after || (!after && !before) ? pageSize : null;
   const last = before ? pageSize : null;
 
-  return useQuery(['posts', query, first, after, last, before], async (): Promise<QueryResult> => {
+  return useQuery(['search', query, first, after, last, before], async (): Promise<QueryResult> => {
     const { search } = await graphQLClient.request(
       gql`
         query search($query: String!, $first: Int, $after: String, $last: Int, $before: String) {

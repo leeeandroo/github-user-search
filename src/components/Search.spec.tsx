@@ -1,14 +1,20 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { act, fireEvent, render, screen, userEvent } from '../../tests/utils';
+import { act, render, screen, userEvent } from '../../tests/utils';
 import { describe, it, expect, vi } from 'vitest';
+
 import Search from './Search';
 
 const mockQueryClient = new QueryClient();
 
 describe('Search component', () => {
-  it('renders', async () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+    vi.clearAllMocks();
+  });
+
+  it('renders', () => {
     render(<Search />);
     expect(screen.getByLabelText(/search github users/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
@@ -27,7 +33,7 @@ describe('Search component', () => {
 
     await act(async () => userEvent.type(textInput, 'leeeandroo{enter}'));
 
-    expect(useStateSpy).toHaveBeenCalledOnce();
+    expect(useStateSpy).toHaveBeenCalled();
   });
 
   it('submits by clicking submit', async () => {
@@ -44,6 +50,6 @@ describe('Search component', () => {
     await act(async () => userEvent.type(textInput, 'leeeandroo'));
     await act(async () => userEvent.click(submitButton));
 
-    expect(useStateSpy).toHaveBeenCalledOnce();
+    expect(useStateSpy).toHaveBeenCalled();
   });
 });

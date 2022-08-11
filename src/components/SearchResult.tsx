@@ -64,9 +64,6 @@ function SearchResult(props: SearchResultProps) {
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 mb-4 m-10 rounded gap-4 gap-x-3 search-result">
         {nodes.map((user: QueryResultUser) => {
-          if (!user.login) {
-            return null;
-          }
           return <User key={user.id} user={user} />;
         })}
       </div>
