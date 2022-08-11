@@ -4,24 +4,25 @@ import SearchResult from './SearchResult';
 function Search() {
   const [query, setQuery] = useState('');
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    const target = e.target as typeof e.target & {
+    const form = event.currentTarget;
+    const formElements = form.elements as typeof form.elements & {
       search: { value: string };
     };
 
-    setQuery(target.search.value);
+    setQuery(formElements.search.value);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form name="search-form" onSubmit={handleSubmit}>
         <label
-          htmlFor="default-search"
+          htmlFor="search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
         >
-          Search
+          Search GitHub Users
         </label>
         <div className="relative">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

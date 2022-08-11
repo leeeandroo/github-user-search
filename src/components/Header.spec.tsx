@@ -1,11 +1,10 @@
 import { render, screen } from '../../tests/utils';
 import { describe, it, expect } from 'vitest';
-import App from './App';
+import Header from './Header';
 
-describe('App component', () => {
+describe('Header component', () => {
   it('renders', async () => {
-    render(<App />);
+    render(<Header />);
     expect(screen.getByText(/user search/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/search github users/i)).toBeInTheDocument();
   });
 });
